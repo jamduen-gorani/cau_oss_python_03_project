@@ -49,6 +49,59 @@ def print_spots(spots):
     for item in spots:
         print("[{}({})] {} {}(lat:{}, long:{})".format(item.get('name'), item.get('ptype'), item.get('city'), item.get('district'), item.get('latitude'), item.get('longitude'))) # 출력형식에 맞추어 출력
 
+def filter_by_name(spots, name):
+    """
+    Args:
+        spots : 클래스 객체의 리스트[spots]
+        name : 필터 요소
+    Returns:
+        함축 리스트를 이용한 필터 적용된 리스트
+    """
+    return [aname for aname in spots if name in aname.get('name')]
+
+def filter_by_city(spots, city):
+    """
+    Args:
+        spots : 클래스 객체의 리스트[spots]
+        city : 필터 요소
+    Returns:
+        함축 리스트를 이용한 필터 적용된 리스트
+    """
+    return [acity for acity in spots if city in acity.get('city')]
+
+def filter_by_district(spots, district):
+    """
+    Args:
+        spots : 클래스 객체의 리스트[spots]
+        district : 필터 요소
+    Returns:
+        함축 리스트를 이용한 필터 적용된 리스트
+    """
+    return [adistrict for adistrict in spots if district in adistrict.get('district')]
+
+def filter_by_ptype(spots, ptype):
+    """
+    Args:
+        spots : 클래스 객체의 리스트[spots]
+        ptype : 필터 요소
+    Returns:
+        함축 리스트를 이용한 필터 적용된 리스트
+    """
+    return [aptype for aptype in spots if ptype in aptype.get('ptype')]
+
+def filter_by_location(spots, locations):
+    """
+    Args:
+        spots : 클래스 객체의 리스트[spots]
+        locations : 필터 적용 시킬 튜플
+    Returns:
+        함축 리스트를 이용한 필터 적용된 리스트
+    """
+    min_lat = locations[0]
+    max_lat = locations[1]
+    min_long = locations[2]
+    max_long = locations[3]
+    return [alocations for alocations in spots if min_lat<float(alocations.get('latitude'))<max_lat and min_long<float(alocations.get('longitude'))<max_long]
 
 # 각 단계별로 테스트 (테스트할때 주석해제 후 사용)
 if __name__ == '__main__':
