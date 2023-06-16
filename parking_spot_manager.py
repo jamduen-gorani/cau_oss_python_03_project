@@ -1,11 +1,53 @@
 class parking_spot:
-    # you have to implement 'constructor(생성자)' and 'get' method
+    
+    def __init__(self, name, city, district, ptype, longitude, latitude): # parking_spot의 생성자
+        self.__item = {'name':name, 'city':city, 'district':district, 'ptype':ptype, 'longitude':str(longitude), 'latitude':str(latitude)}
+
     def __str__(self):
         item = self.__item
         s  = f"[{item['name']}({item['ptype']})] "
         s += f"{item['city']} {item['district']}"
         s += f"(lat:{item['latitude']}, long:{item['longitude']})"
         return s
+    
+    def get(self, keyword = 'name'):
+        """
+        Args:
+            keyword(string) : 반환할 문자열 keyword 기본인수는 'name'.
+        Returns:
+            key : 반환할 문자열
+        """
+        key = self.__item[keyword]
+        return key
+
+def str_list_to_class_list(str_list):
+    """
+    Args:
+        str_list : 객체 리스트로 변환할 문자열 리스트
+    Returns:
+        class_list : parking_spot 클래스 객체의 리스트
+    """
+    class_list = []
+    for item in str_list: # 반복문으로 변환 진행
+        temp = item.split(',') # split함수 이용해서 구분
+        name = temp[1]
+        city = temp[2]
+        district = temp[3]
+        ptype = temp[4]
+        longitude = temp[5]
+        latitude = temp[6]
+        parking = parking_spot(name, city, district, ptype, longitude, latitude)
+        class_list.append(parking) #클래스 객체 리스트 생성
+    return class_list
+
+def print_spots(spots):
+    """
+     Args:
+        spots : 클래스 객체의 리스트[spots]
+    """
+    print("---print elements({})---".format(len(spots))) # 리스트 길이 출력
+    for item in spots:
+        print("[{}({})] {} {}(lat:{}, long:{})".format(item.get('name'), item.get('ptype'), item.get('city'), item.get('district'), item.get('latitude'), item.get('longitude'))) # 출력형식에 맞추어 출력
 
 
 # 각 단계별로 테스트 (테스트할때 주석해제 후 사용)
