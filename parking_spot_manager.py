@@ -103,6 +103,16 @@ def filter_by_location(spots, locations):
     max_long = locations[3]
     return [alocations for alocations in spots if min_lat<float(alocations.get('latitude'))<max_lat and min_long<float(alocations.get('longitude'))<max_long]
 
+def sort_by_keyword(spots, keyword):
+    """
+    Args:
+        spots : 클래스 객체의 리스트[spots]
+        keyword : 정렬 적용 시킬 요소
+    Returns:
+        기준에 맞추어 정렬된 리스트
+    """
+    return sorted(spots, key=lambda X : X.get(keyword))
+
 # 각 단계별로 테스트 (테스트할때 주석해제 후 사용)
 if __name__ == '__main__':
     print("Testing the module...")
